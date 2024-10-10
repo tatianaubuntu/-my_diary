@@ -1,13 +1,15 @@
 from django.urls import path
+from django.views.decorators.cache import cache_page
+
 from diary.apps import DiaryConfig
-from diary.views import EntryListView
+from diary.views import EntryListView, EntryDetailView, EntryCreateView, EntryUpdateView, EntryDeleteView
 
 app_name = DiaryConfig.name
 
 urlpatterns = [
-    path('entries/', EntryListView.as_view(), name='entries'),
-    #path('blog/<int:pk>', BlogDetailView.as_view(), name='blog'),
-    #path('create_blog/', BlogCreateView.as_view(), name='create_blog'),
-    #path('update_blog/<int:pk>', BlogUpdateView.as_view(), name='update_blog'),
-    #path('delete_blog/<int:pk>', BlogDeleteView.as_view(), name='delete_blog'),
+    path('entries/', cache_page(60)(EntryListView.as_view()), name='entries'),
+    path('entry/<int:pk>', cache_page(60)(EntryDetailView.as_view()), name='entry'),
+    path('create_entry/', EntryCreateView.as_view(), name='create_entry'),
+    path('update_entry/<int:pk>', cache_page(60)(EntryUpdateView.as_view()), name='update_entry'),
+    path('delete_entry/<int:pk>', EntryDeleteView.as_view(), name='delete_entry'),
 ]

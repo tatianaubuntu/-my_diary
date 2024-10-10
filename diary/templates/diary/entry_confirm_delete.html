@@ -1,0 +1,23 @@
+{% extends 'diary/base.html' %}
+
+{% block content %}
+<div class="col-12">
+    <div class="row">
+        <div class="col-3">
+        </div>
+        <div class="col-6"><br><br><br>
+            <div class="card">
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <p> Вы действительно хотите удалить запись <b>"{{object | truncatechars:30}}"</b> ?</p>
+                        <button class="p-2 btn btn-outline-dark" type="submit">Подтвердить</button>
+                        <input type="button" class="p-2 btn btn-outline-danger" onclick="history.back();"
+                               value="Отмена"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
