@@ -1,0 +1,23 @@
+{% extends 'diary/base.html' %}
+{% block content %}
+
+<form method="post" enctype="multipart/form-data">
+    <div class="container">
+        <div class="row">
+            {% load crispy_forms_tags %}
+            <div class="col-4">
+            </div>
+            <div class="col-3">
+                <div class="pricing-header pt-md-5 mx-auto text-center">
+                    <p class="lead">Регистрация</p>
+                </div>
+                {% csrf_token %}
+                {{ form|crispy }}<br>
+                <button class="btn btn-warning" type="submit">Отправить</button>
+                <br><br>
+            </div>
+        </div>
+    </div>
+</form>
+
+{% endblock %}
