@@ -13,9 +13,9 @@
         </div>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <a href="{% url 'diary:create_entry' %}" type="button"
-               class="btn btn-sm btn-outline-dark"> + Добавить запись </a>
+               class="btn btn-warning"> + Добавить запись </a>
         </div>
-        <br><br>
+        {% if object_list %}
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             {% for entry in page_obj %}
             <div class="col">
@@ -44,6 +44,12 @@
             </div>
             {% endfor %}
         </div>
+        {% else %}
+        <br>
+        <p class="lead">Записи отсутствуют.</p>
+        <input type="button" class="btn btn-sm btn-outline-dark" onclick="history.back();" value="Назад"/>
+        <br><br><br><br><br><br><br><br><br>
+        {% endif %}
     </div>
 </div>
 

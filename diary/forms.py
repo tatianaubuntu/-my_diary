@@ -12,4 +12,3 @@ class EntryForm(ModelForm):
             'body',
             'image',
         ]
-

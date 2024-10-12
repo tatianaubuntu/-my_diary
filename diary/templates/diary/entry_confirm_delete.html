@@ -11,8 +11,8 @@
                     <form method="post">
                         {% csrf_token %}
                         <p> Вы действительно хотите удалить запись <b>"{{object | truncatechars:30}}"</b> ?</p>
-                        <button class="p-2 btn btn-outline-dark" type="submit">Подтвердить</button>
-                        <input type="button" class="p-2 btn btn-outline-danger" onclick="history.back();"
+                        <button class="btn btn-warning" type="submit">Подтвердить</button>
+                        <input type="button" class="btn btn-outline-dark" onclick="history.back();"
                                value="Отмена"/>
                     </form>
                 </div>

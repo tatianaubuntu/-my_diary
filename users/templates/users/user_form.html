@@ -1,20 +1,23 @@
 {% extends 'diary/base.html' %}
 {% block content %}
-<br><br><br>
+
 <form method="post" enctype="multipart/form-data">
     <div class="container">
         <div class="row">
             {% load crispy_forms_tags %}
-            <div class="col-6">
+            <div class="col-4">
+            </div>
+            <div class="col-3">
+                <div class="pricing-header pt-md-5 mx-auto text-center">
+                    <p class="lead">Профиль</p>
+                </div>
                 {% csrf_token %}
-                {{ form|crispy }}
-                <br>
+                {{ form|crispy }}<br>
                 <button class="btn btn-warning" type="submit">Сохранить</button>
-                <input type="button" class="btn btn-outline-dark" onclick="history.back();" value="Отмена"/>
+                <br><br>
             </div>
         </div>
     </div>
 </form>
-
 
 {% endblock %}
