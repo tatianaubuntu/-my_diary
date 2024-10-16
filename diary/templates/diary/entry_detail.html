@@ -6,7 +6,7 @@
         <input type="button" class="btn btn-sm btn-outline-dark" onclick="history.back();" value="Назад"/>
         <a href="{% url 'diary:entries' %}" type="button"
            class="btn btn-sm btn-outline-dark">Выйти</a><br><br>
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="row row-cols-1 g-3">
             <div class="d-grid gap-2 col-10 mx-auto">
                 <div class="card shadow-sm">
                     {% if entry.image %}
