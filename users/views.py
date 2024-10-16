@@ -1,6 +1,5 @@
 import secrets
 
-from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.views import PasswordResetView
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404, redirect
@@ -8,7 +7,7 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView
 
 from config import settings
-from users.forms import RegisterForm, UserProfileForm
+from users.forms import RegisterForm, UserProfileForm, YourPasswordResetForm
 from users.models import User
 
 
@@ -46,24 +45,22 @@ def email_verification(request, token):
 
 class GeneratePasswordView(PasswordResetView):
     """Класс генерации нового пароля"""
-    form_class = PasswordResetForm
+    form_class = YourPasswordResetForm
     template_name = 'users/generate.html'
 
     def form_valid(self, form):
         """Генерация нового пароля с отправкой по электронной почте"""
         if form.is_valid():
-            email = form.cleaned_data['email']
-            user = User.objects.get(email=email)
-            if user:
-                password = User.objects.make_random_password(12)
-                user.set_password(password)
-                user.save()
-                send_mail(
-                    'Смена пароля "Мой дневник"',
-                    f'Ваш новый пароль: {password}',
-                    settings.EMAIL_HOST_USER,
-                    [user.email],
-                    )
+            user = form.clean_email()
+            password = User.objects.make_random_password(12)
+            user.set_password(password)
+            user.save()
+            send_mail(
+                'Смена пароля "Мой дневник"',
+                f'Ваш новый пароль: {password}',
+                settings.EMAIL_HOST_USER,
+                [user.email],
+            )
             return redirect(reverse("users:login"))
 
 
