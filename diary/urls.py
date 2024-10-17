@@ -1,6 +1,4 @@
 from django.urls import path
-from django.views.decorators.cache import cache_page
-
 from diary.apps import DiaryConfig
 from diary.views import EntryListView, EntryDetailView, EntryCreateView, EntryUpdateView, EntryDeleteView
 
