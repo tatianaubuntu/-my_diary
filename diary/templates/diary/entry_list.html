@@ -14,7 +14,7 @@
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <a href="{% url 'diary:create_entry' %}" type="button"
                class="btn btn-warning"> + Добавить запись </a>
-        </div>
+        </div><br>
         {% if object_list %}
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             {% for entry in page_obj %}
