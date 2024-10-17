@@ -6,7 +6,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 
 from diary.forms import EntryForm
 from diary.models import Entry
-from diary.services import get_cashe_entry_list
+from diary.services import get_cashe_entry_list, get_cashe_entry
 
 
 class EntryListView(LoginRequiredMixin, ListView):
@@ -43,9 +43,10 @@ class EntryDetailView(UserPassesTestMixin, DetailView):
     model = Entry
 
     def get_context_data(self, **kwargs):
-        """Возвращает наименование страницы"""
+        """Возвращает наименование страницы и закешированную запись"""
         context_data = super().get_context_data(**kwargs)
         entry = self.get_object()
+        context_data['entry'] = get_cashe_entry(entry.pk)
         context_data['title'] = entry.title
         return context_data
 
