@@ -16,3 +16,17 @@ def get_cashe_entry_list():
         entry_list = Entry.objects.all()
 
     return entry_list
+
+
+def get_cashe_entry(pk):
+    """Возвращает закешированную запись"""
+    if settings.CACHE_ENABLED:
+        key = 'entry'
+        entry = cache.get(key)
+        if entry is None:
+            entry = Entry.objects.get(pk=pk)
+            cache.set(key, entry)
+    else:
+        entry = Entry.objects.get(pk=pk)
+
+    return entry
